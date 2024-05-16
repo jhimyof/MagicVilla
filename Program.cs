@@ -1,5 +1,7 @@
 using MagicVilla_API;
 using MagicVilla_API.Data;
+using MagicVilla_API.Repository;
+using MagicVilla_API.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +24,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 //Agregar para usar el Automapper que se instaldo con el NUGET
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
+//se debe agregar la Interface de Villa Repository
+builder.Services.AddScoped<IVillaRepository, VillaRepository>();
 
+//se debe agregar la Interface de Numero Villa Repository
+builder.Services.AddScoped<INumeroVillaRepository, NumeroVillaRepository>();
 
 var app = builder.Build();
 
